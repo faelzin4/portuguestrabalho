@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Democracia nas Redes Sociais | Debate Saudável</title>
+  <meta name="description" content="Uma landing page em estilo blog sobre democracia nas redes sociais e como construir um debate saudável com respeito, empatia e responsabilidade." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --surface-2: #eef3ff;
+      --primary: #315efb;
+      --primary-2: #6f8cff;
+      --text: #162033;
+      --muted: #5d6880;
+      --border: rgba(22,32,51,.10);
+      --success: #12a150;
+      --warning: #f59e0b;
+      --danger: #dc2626;
+      --shadow: 0 18px 50px rgba(33, 56, 120, .10);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f7f9ff 0%, #eef4ff 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(49,94,251,.10), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(111,140,255,.10), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(49,94,251,.08), transparent 35%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.75);
+      border-bottom: 1px solid rgba(22,32,51,.06);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      font-size: 1.02rem;
+    }
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 24px rgba(49,94,251,.26);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      list-style: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: .95rem;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(49,94,251,.20);
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.8);
+      color: var(--text);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(49,94,251,.22);
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .hero-card,
+    .hero-side {
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.7);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+    .hero-card {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -60px;
+      top: -60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(49,94,251,.12), transparent 65%);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #edf2ff;
+      border: 1px solid rgba(49,94,251,.10);
+      border-radius: 999px;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 6px rgba(49,94,251,.12);
+    }
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.6rem);
+      line-height: .96;
+      letter-spacing: -.06em;
+      font-weight: 800;
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+    .hero-sub {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.8);
+      border: 1px solid var(--border);
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.35rem;
+      letter-spacing: -.04em;
+      margin-bottom: 2px;
+    }
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .hero-side {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .side-card {
+      background: linear-gradient(180deg, rgba(49,94,251,.05), rgba(255,255,255,.7));
+      border: 1px solid rgba(49,94,251,.10);
+      border-radius: 22px;
+      padding: 22px;
+    }
+    .side-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing: -.03em;
+    }
+    .side-card p {
+      color: var(--muted);
+      font-size: .96rem;
+    }
+    .mini-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .mini-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .mini-list li i {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: rgba(49,94,251,.10);
+      color: var(--primary);
+      font-style: normal;
+      flex-shrink: 0;
+    }
+
+    .section {
+      padding: 28px 0 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+    .section-kicker {
+      color: var(--primary);
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      color: var(--muted);
+      max-width: 700px;
+      font-size: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 26px;
+    }
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 1.35rem;
+      color: var(--primary);
+      background: linear-gradient(135deg, rgba(49,94,251,.13), rgba(111,140,255,.10));
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      letter-spacing: -.03em;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: .97rem;
+    }
+
+    .blog-area {
+      padding: 42px 0 10px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .article {
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .article-cover {
+      padding: 34px;
+      background: linear-gradient(135deg, #315efb 0%, #6f8cff 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-cover::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+    }
+    .article-cover .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: .9rem;
+      opacity: .92;
+      margin-bottom: 14px;
+    }
+    .article-cover h3 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.18;
+      max-width: 720px;
+    }
+    .article-body {
+      padding: 34px;
+    }
+    .article-body h4 {
+      font-size: 1.25rem;
+      letter-spacing: -.03em;
+      margin: 28px 0 10px;
+    }
+    .article-body p {
+      color: #364158;
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+    .article-body ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
+    .article-body li {
+      position: relative;
+      padding-left: 18px;
+      color: #364158;
+    }
+    .article-body li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--primary);
+      font-weight: 800;
+    }
+    .highlight {
+      margin: 24px 0;
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #f4f7ff, #ffffff);
+      border-left: 4px solid var(--primary);
+      border: 1px solid rgba(49,94,251,.10);
+    }
+    .highlight strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      color: var(--text);
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .sidebar-card h4 {
+      font-size: 1.04rem;
+      letter-spacing: -.03em;
+      margin-bottom: 14px;
+    }
+    .tip-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .tip-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .tip-number {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #edf2ff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: .86rem;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .problem {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: var(--shadow);
+    }
+    .problem .pill {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .pill-red { background: rgba(220,38,38,.10); color: var(--danger); }
+    .pill-yellow { background: rgba(245,158,11,.12); color: #b57100; }
+    .pill-blue { background: rgba(49,94,251,.10); color: var(--primary); }
+    .pill-gray { background: rgba(22,32,51,.08); color: #475164; }
+    .problem h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      letter-spacing: -.03em;
+    }
+    .problem p { color: var(--muted); font-size: .95rem; }
+
+    .cta {
+      padding: 64px 0 80px;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, #233fb3 0%, #315efb 55%, #6f8cff 100%);
+      border-radius: 34px;
+      padding: 44px;
+      color: #fff;
+      box-shadow: 0 24px 60px rgba(49,94,251,.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.10);
+    }
+    .cta-box h2 {
+      color: #fff;
+      max-width: 760px;
+      margin-bottom: 12px;
+    }
+    .cta-box p {
+      max-width: 760px;
+      opacity: .92;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-light {
+      background: #fff;
+      color: var(--primary);
+    }
+    .btn-light:hover { transform: translateY(-2px); }
+    .btn-outline-light {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.30);
+    }
+
+    footer {
+      padding: 0 0 34px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    .footer-box {
+      border-top: 1px solid rgba(22,32,51,.08);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: .75s ease;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1060px) {
+      .hero-grid,
+      .blog-grid,
+      .grid-3,
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner { flex-wrap: wrap; }
+      .nav-links { display: none; }
+      .hero { padding-top: 36px; }
+      .hero-card,
+      .hero-side,
+      .article-body,
+      .article-cover,
+      .cta-box,
+      .card,
+      .problem,
+      .sidebar-card { padding: 22px; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .footer-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand">
+        <span class="brand-badge">🌐</span>
+        <span>Debate Saudável</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#conceito">Conceito</a></li>
+        <li><a href="#problemas">Problemas</a></li>
+        <li><a href="#blog">Artigo</a></li>
+        <li><a href="#praticas">Boas práticas</a></li>
+      </ul>
+      <a href="#blog" class="btn btn-primary">Ler agora</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-card reveal">
+          <span class="eyebrow">Democracia digital e convivência online</span>
+          <h1>Como construir um debate saudável nas redes sociais</h1>
+          <p class="hero-sub">
+            As redes sociais deram voz a milhões de pessoas. Mas, para que essa liberdade realmente fortaleça a democracia, é preciso transformar opinião em diálogo, e não em ataque.
+          </p>
+          <div class="hero-actions">
+            <a href="#blog" class="btn btn-primary">Explorar conteúdo</a>
+            <a href="#praticas" class="btn btn-ghost">Ver boas práticas</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Respeito</strong>
+              <span>Base de qualquer debate saudável</span>
+            </div>
+            <div class="stat">
+              <strong>Empatia</strong>
+              <span>Entender antes de responder</span>
+            </div>
+            <div class="stat">
+              <strong>Responsabilidade</strong>
+              <span>Pensar antes de publicar</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-side reveal">
+          <div class="side-card">
+            <h3>Por que esse tema importa?</h3>
+            <p>
+              A forma como falamos nas redes influencia a convivência, a informação e até a qualidade da participação democrática no dia a dia.
+            </p>
+            <ul class="mini-list">
+              <li><i>✓</i><span>Ajuda a reduzir conflitos desnecessários</span></li>
+              <li><i>✓</i><span>Combate fake news e desinformação</span></li>
+              <li><i>✓</i><span>Fortalece o respeito entre pessoas diferentes</span></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Ideia central</h3>
+            <p>
+              Liberdade de expressão não significa ausência de limites. Debater com responsabilidade é o que transforma uma rede social em espaço democrático de verdade.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="conceito">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Conceito</div>
+            <h2>O que é democracia nas redes sociais?</h2>
+          </div>
+          <p class="section-desc">
+            Democracia nas redes sociais significa permitir que diferentes vozes participem das conversas públicas, compartilhem ideias e debatam assuntos importantes com liberdade e respeito.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="icon">🗣️</div>
+            <h3>Todos têm voz</h3>
+            <p>
+              As plataformas digitais permitem que qualquer pessoa opine, comente e participe de discussões antes limitadas a poucos espaços.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">⚖️</div>
+            <h3>Liberdade com limite</h3>
+            <p>
+              Ter liberdade de expressão não significa poder atacar, humilhar ou espalhar desinformação sem consequência.
+            </p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">🤝</div>
+            <h3>Convivência democrática</h3>
+            <p>
+              Um ambiente saudável depende da disposição de ouvir, respeitar opiniões diferentes e contribuir para conversas construtivas.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="problemas">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Desafios</div>
+            <h2>Problemas comuns nas redes</h2>
+          </div>
+          <p class="section-desc">
+            Quando o respeito desaparece, o debate perde qualidade. Em vez de troca de ideias, surgem conflitos, manipulação e violência verbal.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="problem reveal">
+            <span class="pill pill-red">Ofensas</span>
+            <h3>Ataques pessoais</h3>
+            <p>Críticas deixam de ser sobre ideias e viram agressões contra a pessoa.</p>
+          </article>
+          <article class="problem reveal">
+            <span class="pill pill-yellow">Fake News</span>
+            <h3>Informações falsas</h3>
+            <p>Conteúdos sem verificação confundem, manipulam e espalham medo ou ódio.</p>
+          </article>
+          <article class="problem reveal">
+            <span class="pill pill-blue">Desrespeito</span>
+            <h3>Falta de diálogo</h3>
+            <p>Quando ninguém escuta, o debate vira disputa vazia e improdutiva.</p>
+          </article>
+          <article class="problem reveal">
+            <span class="pill pill-gray">Ódio</span>
+            <h3>Discurso violento</h3>
+            <p>Mensagens hostis afastam pessoas e enfraquecem qualquer espaço democrático.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-area" id="blog">
+      <div class="container blog-grid">
+        <article class="article reveal">
+          <div class="article-cover">
+            <div class="meta">
+              <span>📘 Estilo blog</span>
+              <span>⏱ Leitura rápida</span>
+              <span>🌱 Educação digital</span>
+            </div>
+            <h3>Democracia nas redes sociais: como construir um debate saudável</h3>
+          </div>
+
+          <div class="article-body">
+            <p>
+              As redes sociais fazem parte do nosso dia a dia. Nelas, qualquer pessoa pode dar sua opinião, comentar e participar de discussões. Isso mostra uma das marcas da democracia: a possibilidade de todos terem voz.
+            </p>
+            <p>
+              Porém, para que essa liberdade funcione de forma positiva, é essencial que exista respeito. Sem isso, as conversas deixam de ser debates e passam a ser conflitos marcados por agressividade, desinformação e intolerância.
+            </p>
+
+            <h4>O que significa democracia nas redes?</h4>
+            <p>
+              Democracia nas redes sociais significa participação. É o direito de se expressar, compartilhar ideias, discordar e dialogar sobre assuntos importantes. Mas isso não quer dizer que vale tudo.
+            </p>
+            <div class="highlight">
+              <strong>Liberdade de expressão não é licença para ofender.</strong>
+              Opinar faz parte da democracia. Desrespeitar, espalhar mentiras ou atacar pessoas enfraquece esse direito em vez de fortalecê-lo.
+            </div>
+
+            <h4>Por que tantos debates acabam mal?</h4>
+            <p>
+              Em muitas situações, as discussões online se tornam ambientes hostis. A rapidez das redes, o impulso de responder sem pensar e a facilidade de compartilhar qualquer conteúdo contribuem para isso.
+            </p>
+            <ul>
+              <li>Ofensas substituem argumentos.</li>
+              <li>Fake news circulam sem verificação.</li>
+              <li>A falta de empatia gera mais agressividade.</li>
+              <li>Discursos de ódio afastam a possibilidade de convivência.</li>
+            </ul>
+
+            <h4>Como construir um debate saudável?</h4>
+            <p>
+              Melhorar as conversas nas redes sociais depende de atitudes simples, mas muito importantes. Cada pessoa tem responsabilidade pelo que escreve, compartilha e incentiva.
+            </p>
+            <ul>
+              <li><strong>Respeitar opiniões diferentes:</strong> nem todo mundo pensa igual, e isso é normal.</li>
+              <li><strong>Pensar antes de comentar:</strong> vale perguntar se a mensagem vai ajudar ou machucar alguém.</li>
+              <li><strong>Evitar brigas desnecessárias:</strong> nem toda discordância precisa virar guerra.</li>
+              <li><strong>Conferir informações:</strong> antes de compartilhar, é importante verificar se o conteúdo é verdadeiro.</li>
+              <li><strong>Praticar empatia:</strong> colocar-se no lugar do outro muda a forma de falar e reagir.</li>
+            </ul>
+
+            <h4>Por que isso é tão importante?</h4>
+            <p>
+              Quando o ambiente digital é saudável, as pessoas aprendem umas com as outras, trocam experiências, desenvolvem senso crítico e convivem melhor com a diversidade. Isso fortalece a democracia de verdade.
+            </p>
+            <p>
+              Já quando o debate é dominado por agressões e mentiras, todos perdem: a conversa perde qualidade, a confiança diminui e a violência virtual cresce.
+            </p>
+
+            <h4>Conclusão</h4>
+            <p>
+              A democracia nas redes sociais só funciona quando existe respeito. Ter voz é importante, mas usar essa voz com responsabilidade é ainda mais. Cada comentário, curtida e compartilhamento ajuda a construir o tipo de ambiente em que queremos viver.
+            </p>
+            <p>
+              Se cada um fizer sua parte, as redes podem ser mais do que espaços de opinião: podem se tornar lugares de diálogo, aprendizado e convivência mais justa e humana.
+            </p>
+          </div>
+        </article>
+
+        <aside class="sidebar" id="praticas">
+          <div class="sidebar-card reveal">
+            <h4>5 atitudes essenciais</h4>
+            <ul class="tip-list">
+              <li><span class="tip-number">1</span><span>Respeite opiniões diferentes, mesmo quando discordar.</span></li>
+              <li><span class="tip-number">2</span><span>Pense antes de comentar ou responder no impulso.</span></li>
+              <li><span class="tip-number">3</span><span>Cheque a informação antes de compartilhar.</span></li>
+              <li><span class="tip-number">4</span><span>Evite transformar debate em ataque pessoal.</span></li>
+              <li><span class="tip-number">5</span><span>Use empatia para criar diálogo, não conflito.</span></li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card reveal">
+            <h4>Resumo rápido</h4>
+            <p style="color: var(--muted); margin-bottom: 14px;">
+              Uma rede social democrática não depende só de liberdade, mas também de responsabilidade no uso dessa liberdade.
+            </p>
+            <a href="#inicio" class="btn btn-ghost" style="width: 100%;">Voltar ao topo</a>
+          </div>
+
+          <div class="sidebar-card reveal">
+            <h4>Mensagem principal</h4>
+            <p style="color: var(--muted);">
+              Debater bem não é vencer uma discussão. É construir um espaço onde diferentes pessoas possam ser ouvidas com dignidade.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="section-kicker" style="color: rgba(255,255,255,.78);">Conclusão</div>
+          <h2>Respeito é o que transforma liberdade em democracia de verdade</h2>
+          <p>
+            Redes sociais podem aproximar pessoas, ampliar vozes e fortalecer a convivência. Mas isso só acontece quando cada usuário entende que sua participação tem impacto real sobre os outros.
+          </p>
+          <div class="cta-actions">
+            <a href="#blog" class="btn btn-light">Ler artigo novamente</a>
+            <a href="#praticas" class="btn btn-outline-light">Rever boas práticas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <div>© 2026 Debate Saudável — Landing page em estilo blog.</div>
+      <div>Feita para conscientização sobre democracia, respeito e convivência digital.</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
